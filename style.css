@@ -64,6 +64,20 @@ body {
     text-align: right;
 }
 
+.text-down {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.search-icon {
+    text-shadow: 0 0 rgba(0, 0, 0, 0.9);
+}
+
+.icon-location {
+    margin: auto 0;
+}
+
 .time-font {
     font-size: 50px;
 }
@@ -79,6 +93,43 @@ body {
 .large-font {
     font-size: 60px;
 }
+
+.fa-location-dot {
+    cursor: pointer;
+}
+
+.fa-location-dot:hover {
+    text-shadow: 0 0 5px white;
+}
+
+.fa-search {
+    cursor: pointer;
+    transform: scale(0.7);
+    color: rgba(255, 255, 255, 0.2);
+
+}
+
+.searchLocation {
+    display: flex;
+    align-items: center;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 1%;
+}
+
+#search-city {
+    border: none;
+    background: transparent;
+    color: white;
+    width: 100%;
+}
+
+
 
 
 
@@ -127,6 +178,24 @@ body {
         border-radius: 0px;
         border: 0px;
     }
+
+    .text-up {
+        flex-direction: column;
+    }
+
+    .text-in-text-up {
+        text-align: center;
+    }
+
+    .temp {
+        justify-content: center;
+    }
+
+    .searchLocation {
+        margin-bottom: 9rem;
+    }
+
+    
 
     .rain {
         background-image: url(images/rain-mobile.jpg);

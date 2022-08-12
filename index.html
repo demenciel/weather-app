@@ -24,12 +24,14 @@
         <div class="row d-flex justify-content-center px-3 card-container">
             <div class="card">
                 <div class="text-up">
-                    <div class="location">
-                        <i class="fa-solid fa-location-dot large-font"></i>
-                    </div>
+                    <form class="searchLocation">
+                        <i class="fa-solid search-icon fa-search large-font"></i>
+                        <input name="city" id="search-city" type="text" placeholder="Change city">
+                    </form>
                     <div class="text-in-text-up">
                         <h2 class="city" id="city" class="ml-auto mr-4 mt-3 mb-0">Toronto</h2>
                         <p id="condition" class="ml-auto mr-4 mb-0 med-font">Rain</p>
+
                         <div class="temp">
                             <h1 id="temp" class="ml-auto mr-4 large-font">-20</h1><span class="med-font">&#176;</span>
                         </div>
@@ -37,8 +39,14 @@
 
                 </div>
                 <div class="text-down">
-                    <p id="hour" class="time-font mb-0 ml-4 mt-auto">08:30 <span class="sm-font">AM</span></p>
-                    <p id="date" class="ml-4 mb-4">Wednesday, 18 October 2019</p>
+                    <div class="text-in-text-down">
+                        <p id="hour" class="time-font mb-0 ml-4 mt-auto">08:30 <span class="sm-font">AM</span></p>
+                        <p id="date" class="ml-4 mb-4">Wednesday, 18 October 2019</p>
+                    </div>
+                    <div class="icon-location">
+                        <i id="mobile-icon" class=" fa-solid fa-location-dot large-font"></i>
+                    </div>
+
                 </div>
             </div>
         </div>
