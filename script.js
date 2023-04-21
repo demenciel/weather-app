@@ -1,39 +1,33 @@
 function backgroundChange(weather) {
-    if (weather === 'Rain') {
-        $('.card').addClass('rain');
-        $('.card').removeClass('sunny');
-        $('.card').removeClass('haze');
-        $('.card').removeClass('clouds');
-    } else if (weather === 'Clouds') {
-        $('.card').addClass('clouds');
-        $('.card').removeClass('sunny');
-        $('.card').removeClass('haze');
-        $('.card').removeClass('rain');
-    } else if (weather === 'Clear') {
-        $('.card').addClass('sunny');
-        $('.card').removeClass('rain');
-        $('.card').removeClass('haze');
-        $('.card').removeClass('clouds');
-    } else if (weather === 'Haze') {
-        $('.card').addClass('haze');
-        $('.card').removeClass('sunny');
-        $('.card').removeClass('rain');
-        $('.card').removeClass('clouds');
-    }
-    else {
-        $('.card').addClass('rain');
+    const weatherClasses = ['rain', 'clouds', 'sunny', 'haze'];
+    $('.card').removeClass(weatherClasses.join(' '));
+
+    switch (weather) {
+        case 'Rain':
+            $('.card').addClass('rain');
+            break;
+        case 'Clouds':
+            $('.card').addClass('clouds');
+            break;
+        case 'Clear':
+            $('.card').addClass('sunny');
+            break;
+        case 'Haze':
+            $('.card').addClass('haze');
+            break;
+        default:
+            $('.card').addClass('rain');
+            break;
     }
 }
 
 // Loaded Page Default
-
 function geoLocation() {
     if ('geolocation' in navigator) {
-
         navigator.geolocation.getCurrentPosition((position) => {
             let lat = position.coords.latitude;
             let long = position.coords.longitude;
-            let url = 'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + long + '&appid=dc8c9152e8adaad0ec8bf635818c0d42&units=metric';
+            let url = 'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + long + '&appid=' + config.apiKey + '&units=metric';
     
             $.ajax({
                 url: url,
@@ -53,70 +47,38 @@ function geoLocation() {
         })
     };
 }
-
 geoLocation();
-
 // Get location from icon clicked
-
-$('#mobile-icon').click(
-
-    function geoLocation() {
-        if ('geolocation' in navigator) {
-
-            navigator.geolocation.getCurrentPosition((position) => {
-                let lat = position.coords.latitude;
-                let long = position.coords.longitude;
-                let url = 'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + long + '&appid=dc8c9152e8adaad0ec8bf635818c0d42&units=metric';
-        
-                $.ajax({
-                    url: url,
-                    type: "GET",
-                    dataType: 'json',
-                    success: (data) => {
-                        $('#city').text(data.name)
-                        $('#condition').text(data.weather[0].main);
-                        $('h1').text(Math.round(data.main.temp));
-        
-                        backgroundChange(data.weather[0].main);
-                    },
-                    error: () => {
-                        return false
-                    }
-                });
-            })
-        };
-    });
+$('#mobile-icon').click(geoLocation);
 
 // Get location from input
+function fetchData() {
+    var city = document.querySelector('#search-city').value;
+    const url = 'https://api.openweathermap.org/data/2.5/weather?q='+ city + '&appid=' + config.apiKey + '&units=metric';
+    $.ajax({
+        url: url,
+        type: "GET",
+        dataType: 'json',
+        success: (data) => {
+            $('#city').text(data.name)
+            $('#condition').text(data.weather[0].main);
+            $('h1').text(Math.round(data.main.temp));
 
-$('.search-icon').click(
-    function () {
-        var city = document.querySelector('#search-city').value;
-
-        const url = 'https://api.openweathermap.org/data/2.5/weather?q='+city+'&appid=dc8c9152e8adaad0ec8bf635818c0d42&units=metric';
-          
-        $.ajax({
-            url: url,
-            type: "GET",
-            dataType: 'json',
-            success: (data) => {
-                $('#city').text(data.name)
-                $('#condition').text(data.weather[0].main);
-                $('h1').text(Math.round(data.main.temp));
-
-                backgroundChange(data.weather[0].main);
-            },
-            error: () => {
-                return false
-            }
-        });  
-    });
-
+            backgroundChange(data.weather[0].main);
+        },
+        error: () => {
+            return false
+        }
+    });  
+}
+$('.search-icon').click(fetchData);
+$('.searchLocation').submit(function(event) {
+    event.preventDefault();
+    fetchData();
+});
 backgroundChange('Sunny');
 
-
 // GET DATE
-
 function getDate() {
     let dateActuelle = new Date();
     let dateLocale = dateActuelle.toLocaleString(navigator.language, {
@@ -128,7 +90,6 @@ function getDate() {
 
     $('#date').html(dateLocale);
 }
-
 function getHour() {
     let date = new Date();
     let dateLocale = date.toLocaleString(navigator.language, {
@@ -138,11 +99,5 @@ function getHour() {
 
     $('#hour').html(dateLocale);
 };
-
-
 getDate();
 getHour();
-
-
-
- 
