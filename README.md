@@ -15,9 +15,9 @@ To use this app, simply clone this repository and open `index.html` in your pref
 ### Prerequisites
 
 You need an API key from OpenWeatherMap to use the API. Replace `your_api_key` in the following line with your actual API key:
-
+```
 const url = 'https://api.openweathermap.org/data/2.5/weather?q='+city+'&appid=your_api_key&units=metric';
-
+```
 
 ## Built With
 
